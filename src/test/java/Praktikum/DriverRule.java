@@ -43,7 +43,7 @@ public class DriverRule extends ExternalResource {
         options.addArguments("--disable-gpu");
         options.addArguments("--window-size=1920,1080");
         options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
 
     }
 
