@@ -6,12 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class DriverRule extends ExternalResource {
     private WebDriver driver;
 
     @Override
-    protected void before() throws Throwable {
+    protected void before() {
         initDriver();
     }
 
@@ -31,7 +32,14 @@ public class DriverRule extends ExternalResource {
 
     private void initFirefox() {
         WebDriverManager.firefoxdriver().setup();
-        driver = new FirefoxDriver();
+        FirefoxOptions options = new FirefoxOptions();
+        options.addArguments("--headless");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--window-size=1920,1080");
+        options.addArguments("--remote-allow-origins=*");
+        driver = new FirefoxDriver(options);
     }
 
     private void initChrome() {
